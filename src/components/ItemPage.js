@@ -7,15 +7,25 @@ function ItemPage({items, onAddToCart}) {
   return(
     <ul className="itemPage-items">
       {
-        items.map((item) => <Item key={item.id} item={item} onAddToCart={onAddToCart.bind(null, item)}/>)
+        items.map((item) =>
+          <li key={item.id} className="item-page-item">
+            <Item item={item}
+                  onAddToCart={onAddToCart.bind(null, item)}
+            />
+          </li>
+        )
       }
     </ul>
   )
-
 }
 
+
+
+
+
 ItemPage.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  onAddToCart: PropTypes.func.isRequired
 }
 
 export default ItemPage

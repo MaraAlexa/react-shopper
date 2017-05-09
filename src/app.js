@@ -17,7 +17,8 @@ class App extends React.Component {
 
     // initial state
     this.state = {
-      selectedTabFlag: 0, cart: 0
+      selectedTabFlag: 0,
+      cart: []
     }
   }
   // change state
@@ -30,16 +31,25 @@ class App extends React.Component {
 
   handleAddToCart = (item) => {
     this.setState({
-      cart: this.state.cart += item.price
+      // adds new item by id in the cart state
+      cart: [...this.state.cart, item.id]
     })
   }
 
   render() {
     return (
       <div className='App'>
-        <Nav onTabChange={this.changeSelectedTab} flag={this.state.selectedTabFlag}/>
+        <Nav  numberOfItems={this.state.cart.length}
+              onTabChange={this.changeSelectedTab} 
+              flag={this.state.selectedTabFlag}
+        />
         <main className='app-content'>
-          {this.state.selectedTabFlag === 0 ? <ItemPage items={items} onAddToCart={this.handleAddToCart}/> :  <p>cart content</p> }
+          {this.state.selectedTabFlag === 0 ?
+            <ItemPage
+              items={items}
+              onAddToCart={this.handleAddToCart}/>
+              :
+              <p>cart content</p> }
         </main>
       </div>
     )

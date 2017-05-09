@@ -11,6 +11,7 @@ class Nav extends React.Component {
           </li>
           <li className={`app-nav-item ${this.props.flag !== 0 && 'selected'}`}>
             <a href="" onClick={this.props.onTabChange.bind(this, 1)}>Shopping Cart</a>
+            <span className={`shopping-items-length ${this.props.numberOfItems === 0 ? 'hide' : ''}`}>{this.props.numberOfItems}</span>
           </li>
         </ul>
       </nav>
