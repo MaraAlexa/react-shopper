@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom'
 // import components
 import Nav from './components/Nav'
 import ItemPage from './components/ItemPage'
+import CartPage from './components/CartPage'
 
 // data
 import {items} from './data/shopperData'
@@ -21,14 +22,14 @@ class App extends React.Component {
       cart: []
     }
   }
-  // change state
+  // change tab state
   changeSelectedTab = (index, e) => {
     e.preventDefault()
     this.setState({
       selectedTabFlag: index
     })
   }
-
+ // change cart state
   handleAddToCart = (item) => {
     this.setState({
       // adds new item by id in the cart state
@@ -36,11 +37,43 @@ class App extends React.Component {
     })
   }
 
+  renderCart = () => {
+    // count how many of each item in cart
+    let itemCounts = this.state.cart.reduce((itemCounts, itemId) => {
+      itemCounts[itemId] = itemCounts[itemId] || 0;
+      itemCounts[itemId] ++ ;
+      return itemCounts;
+    }, {});
+    // create an array of items
+    let keys = Object.keys(itemCounts);
+    let cartItems = keys.map(itemId => {
+      // find item by ID
+      var item = items.find(item => item.id === parseInt(itemId, 10));
+      // create new item that also has count prop
+      return {
+        ...item,
+        count: itemCounts[itemId]
+      }
+    })
+    return cartItems
+  }
+
+  handleRemoveOne = (item) => {
+    let { cart } = this.state;
+    let idx = cart.indexOf(item.id);
+    this.setState({
+      cart: [
+        ...cart.slice(0, idx),
+        ...cart.slice(idx + 1)
+      ]
+    })
+  }
+
   render() {
     return (
       <div className='App'>
         <Nav  numberOfItems={this.state.cart.length}
-              onTabChange={this.changeSelectedTab} 
+              onTabChange={this.changeSelectedTab}
               flag={this.state.selectedTabFlag}
         />
         <main className='app-content'>
@@ -49,7 +82,12 @@ class App extends React.Component {
               items={items}
               onAddToCart={this.handleAddToCart}/>
               :
-              <p>cart content</p> }
+            <CartPage
+              items={this.renderCart()}
+              onAddOne={this.handleAddToCart}
+              onRemoveOne={this.handleRemoveOne}
+            />
+          }
         </main>
       </div>
     )

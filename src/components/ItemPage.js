@@ -9,19 +9,18 @@ function ItemPage({items, onAddToCart}) {
       {
         items.map((item) =>
           <li key={item.id} className="item-page-item">
-            <Item item={item}
-                  onAddToCart={onAddToCart.bind(null, item)}
-            />
+            <Item item={item} >
+              <button className='item-addToCart'
+                      onClick={onAddToCart.bind(null, item)} >
+                Add To Cart
+              </button>
+            </Item>
           </li>
         )
       }
     </ul>
   )
 }
-
-
-
-
 
 ItemPage.propTypes = {
   items: PropTypes.array.isRequired,
