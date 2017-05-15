@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import Item from './Item'
 
-function CartPage({items, onAddOne, onRemoveOne}) {
+function CartPage({cartItems, onAddOne, onRemoveOne}) {
   return(
     <ul className="itemPage-items">
       {
-        items.map((item) =>
+        cartItems.map((item) =>
           <li key={item.id} className="item-page-item">
             <Item item={item}>
               <div className="cartItem-control">
@@ -20,15 +20,18 @@ function CartPage({items, onAddOne, onRemoveOne}) {
                 </button>
               </div>
             </Item>
+
+            <b>Subtotal: {item.price * item.count}</b>
           </li>
         )
       }
+      <li>Total Price: ${cartItems.reduce((sum, item) => sum + (item.price * item.count), 0)}</li>
     </ul>
   )
 }
 
 CartPage.propTypes = {
-  items: PropTypes.array.isRequired,
+  cartItems: PropTypes.array.isRequired,
   onAddOne: PropTypes.func.isRequired,
   onRemoveOne: PropTypes.func.isRequired
 }

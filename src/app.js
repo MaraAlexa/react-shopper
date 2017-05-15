@@ -32,7 +32,7 @@ class App extends React.Component {
  // change cart state
   handleAddToCart = (item) => {
     this.setState({
-      // adds new item by id in the cart state
+      // adds new item id in the cart state
       cart: [...this.state.cart, item.id]
     })
   }
@@ -42,10 +42,11 @@ class App extends React.Component {
     let itemCounts = this.state.cart.reduce((itemCounts, itemId) => {
       itemCounts[itemId] = itemCounts[itemId] || 0;
       itemCounts[itemId] ++ ;
+      console.log(itemCounts[itemId]);
       return itemCounts;
-    }, {});
+    }, {}); // {id0: 2, id1: 1, id2: 1 ... }
     // create an array of items
-    let keys = Object.keys(itemCounts);
+    let keys = Object.keys(itemCounts); // ['id0', 'id1', ...]
     let cartItems = keys.map(itemId => {
       // find item by ID
       var item = items.find(item => item.id === parseInt(itemId, 10));
@@ -55,7 +56,8 @@ class App extends React.Component {
         count: itemCounts[itemId]
       }
     })
-    return cartItems
+    return cartItems;
+
   }
 
   handleRemoveOne = (item) => {
@@ -83,7 +85,7 @@ class App extends React.Component {
               onAddToCart={this.handleAddToCart}/>
               :
             <CartPage
-              items={this.renderCart()}
+              cartItems={this.renderCart()}
               onAddOne={this.handleAddToCart}
               onRemoveOne={this.handleRemoveOne}
             />
