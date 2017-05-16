@@ -21,11 +21,16 @@ function CartPage({cartItems, onAddOne, onRemoveOne}) {
               </div>
             </Item>
 
-            <b>Subtotal: {item.price * item.count}</b>
           </li>
         )
       }
-      <li>Total Price: ${cartItems.reduce((sum, item) => sum + (item.price * item.count), 0)}</li>
+
+      <li className="total-price">Total Price: ${cartItems.reduce((sum, item) => sum + (item.price * item.count), 0)}</li>
+      {
+        cartItems.length > 0 ? <button className="buy">Buy</button> : ''
+      }
+
+
     </ul>
   )
 }

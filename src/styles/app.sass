@@ -12,6 +12,7 @@ body
     padding: 0
     margin: 0
     display: flex
+    list-style-type: none
     li.app-nav-item
       list-style: none
       margin-right: 30px
@@ -23,10 +24,17 @@ body
     li.app-nav-item.selected
       font-weight: bold
       border-bottom: 3px solid orange
+    li.cartItems-icon
+      margin-left: 38vw
 
 .app-content
   margin: 0 20px
-
+ul.itemPage-items
+  list-style-type: none
+  li.total-price
+    font-weight: bold
+    text-align: right
+    padding: 10px
 .shopping-items-length
   font-size: small
   border: 1px solid black
@@ -74,3 +82,13 @@ body
 .item-left
   display: flex
 .item-right
+
+// buy button
+.buy
+  padding: 10px
+  background: #ED8400
+  color: #fff
+  border-radius: 4px
+  width: 120px
+  font-size: 22px
+  float: right
