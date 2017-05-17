@@ -17,7 +17,7 @@ class Nav extends React.Component {
 
           <li className="cartItems-icon">
             <a href="" onClick={this.props.onTabChange.bind(this, 1)}>
-                {`${this.props.numberOfItems} ${'items $'}${this.props.cartItems.reduce((sum, item) => sum + (item.price * item.count), 0)}`}
+                {`${this.props.numberOfItems} ${'items ($'} ${this.props.cartItems.reduce((sum, item) => sum + (item.price * item.count), 0)})`}
             </a>
           </li>
         </ul>

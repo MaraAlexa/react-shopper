@@ -3,8 +3,18 @@ import PropTypes from 'prop-types'
 
 import Item from './Item'
 
+let EmptyCart = () => (
+  <div className="CartPage-empty">
+    Your cart is empty.
+    <br/>
+    Why not add some expensive products to it?
+  </div>
+);
+
 function CartPage({cartItems, onAddOne, onRemoveOne}) {
   return(
+    cartItems.length === 0 ? <EmptyCart />
+    :
     <ul className="itemPage-items">
       {
         cartItems.map((item) =>
